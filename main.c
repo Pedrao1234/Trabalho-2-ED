@@ -157,6 +157,59 @@ int main(int argc, char *argv[]) {
     }
   }
 
+  
+  int op = -1;
+  while (op != 3){
+    char Cod_ibge[8];
+    
+    printf("---------- Menu Hash Municipios ----------\n");
+    printf("Opção 1: Buscar um Município na Hash\n");
+    printf("Opção 2: Deletar um elemento da Hash\n");
+    printf("Opção 3: Apagar a Hash e sair do programa\n");
+    printf("Digite sua opção: \n");
+    scanf("%d", &op);
+    
+    if(op == 1){
+      printf("Digite o código ibge pelo qual deseja procurar o Município: \n");
+      scanf(" %7[^\n]", Cod_ibge);
+      size_t tamCod = strlen(Cod_ibge);
+      char *strCopy = malloc((tamCod + 1) * sizeof(char));
+      strcpy(strCopy, Cod_ibge);
+      const char *strPtr = strCopy;
+      
+      tMunicipios *mun = (tMunicipios *)hash_busca(
+      Hash, strPtr);
+      if(mun != NULL){
+      printf("%s\n %s\n %f\n %f\n %d\n %d\n %d\n %d\n %s\n", mun->cod_ibge, mun->nome, mun->latitude, mun->longitude, mun->capital, mun->cod_uf, mun->cod_siafi, mun->ddd, mun->fuso_hor);
+
+      }
+      else{
+        printf("Município não encontrado!\n");
+      }
+    }
+
+    if(op == 2){
+      printf("Digite o código do Município que deseja deletar: ");
+      scanf(" %7[^\n]", Cod_ibge);
+      size_t tamCod = strlen(Cod_ibge);
+      char *strCopy = malloc((tamCod + 1) * sizeof(char));
+      strcpy(strCopy, Cod_ibge);
+      const char *strPtr = strCopy;
+      hash_remove(&Hash, strPtr);
+    }
+
+    if(op == 3){
+      hash_apaga(&Hash);
+      printf("Hash Apagada e programa finalizado!\n");
+    }
+  
+
+
+    
+  }
+
+
+  /*
   const char *key = "2100600";
   tMunicipios *elemento = (tMunicipios *)hash_busca(Hash, key);
 
@@ -169,7 +222,7 @@ int main(int argc, char *argv[]) {
     printf("Elemento não encontrado.\n");
   }
 
-
+  */
 
   return 0;
 }
