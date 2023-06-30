@@ -42,7 +42,6 @@ uint32_t hashf(const char *str, uint32_t h) {
 }
 
 uint32_t hashf2(const char *str, uint32_t h) {
-  /* Another hash function for double hashing */
   for (; *str; ++str) {
     h ^= *str;
     h *= 0x9e3779b1;
